@@ -1,0 +1,9 @@
+* Todos
+** DONE Provide conda environment
+CLOSED: [2020-06-15 Mon 09:27]
+** DONE Check the implementation
+CLOSED: [2020-06-15 Mon 09:52]
+** DOING Split the train step from core functionality
+** TODO Provide test image samples of persons
+** TODO Restructure the code
+** TODO Further refine docs and documentation

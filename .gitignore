@@ -1,4 +1,6 @@
-weights
 __pycache__
 data/images
 data/videos
+weights/checkpoint
+*.tf.*
+*.index
