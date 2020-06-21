@@ -35,19 +35,28 @@ def parse_cfg(cfgfile):
     return blocks
 
 
+def load_class_names(file_name):
+    with open(file_name, 'r') as f:
+        class_names = f.read().splitlines()
+
+    return class_names
+
+
 WEIGHTS_FILE = "resources/cfg/weights/yolov3.weights"
 YOLO_CFG_FILE = "resources/cfg/yolov3.cfg"
 MODEL_FILE = "resources/model/yolo.tf"
-COCO_NAMES = "resources/cfg/coco.names"
+CLASS_NAMES_FILE = "resources/cfg/coco.names"
+CLASS_NAMES = load_class_names(CLASS_NAMES_FILE)
+PERSON_CLASS_NAME = "person"
 MODEL_SIZE = (416, 416, 3)
-CLASSES_USED = 80 # Corresponds to coco.names # 80
+CLASSES_USED = 80
 GPU_DEVICES = tf.config.experimental.list_physical_devices('GPU')
 MAX_OUTPUT_SIZE = 40
 MAX_OUTPUT_SIZE_PER_CLASS = 20
 IOU_THRESHOLD = 0.5
 CONFIDENCE_THRESHOLD = 0.5
 BLOCKS = parse_cfg(YOLO_CFG_FILE)
-OUTPUT_PATH = "output"
+VIDEO_IMAGES_PATH = "resources/data/sample/images"
 
 # Further configure & read data
 reconfigure_tensorflow(GPU_DEVICES)

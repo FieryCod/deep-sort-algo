@@ -1,5 +1,5 @@
 import numpy as np
-from deep_sort.impl.yolo import YOLOv3Net
+import deep_sort.tracking.yolo as yolo
 import deep_sort.cfg as cf
 
 def load_weights(model, blocks, weightfile):
@@ -45,7 +45,7 @@ def load_weights(model, blocks, weightfile):
 
 
 def main():
-    model = YOLOv3Net(cf.BLOCKS, cf.MODEL_SIZE, cf.CLASSES_USED)
+    model = yolo.init(cf.BLOCKS, cf.MODEL_SIZE, cf.CLASSES_USED)
     load_weights(model, cf.BLOCKS, cf.WEIGHTS_FILE)
 
     try:

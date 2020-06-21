@@ -5,9 +5,9 @@
 3. Run ~python -m deep_sort.setup~
 4. Put sample video in ~resources/data/sample/original.webm~
 5. Split the video to sequence of images:
-#+BEGIN_SRC bash
-  ffmpeg -i resources/data/sample/original.webm -s 960x540 -r 25  resources/data/sample/output/%04d.jpg
-#+END_SRC
+   #+BEGIN_SRC bash
+     rm -Rf "resources/data/sample/images/*.jpg" && ffmpeg -i resources/data/sample/original.webm -s 960x540 -r 30  resources/data/sample/images/%04d.jpg
+   #+END_SRC
 ** Dataset
 Original dataset was downloaded from site which hosts various challenges for measuring the efficiency and correctness of the tracking methods. The dataset source might be found [[https://motchallenge.net/vis/MOT17-07-SDP][here]].
 
@@ -37,7 +37,7 @@ To gather metadata of the video simply use the command:
 ** Configuration sources
  - [[https://pjreddie.com/media/files/yolov3.weights][Pretrained yolov3 weights]]
  - [[https://github.com/pjreddie/darknet/blob/master/data/coco.names][Detected objects]]
- - [[ https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg][Yolo configuration]]
+ - [[https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg][Yolo configuration]]
 ** Playground
 *** Simple image detection
 #+BEGIN_SRC bash
