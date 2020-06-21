@@ -4,22 +4,42 @@
 2. Run ~conda env create -f environment.yml~
 3. Run ~python -m deep_sort.setup~
 4. Put sample video in ~resources/data/sample/original.webm~
-5. Split the video to sequence of images:
+5. Change the original format to ~.mp4~
+ #+BEGIN_SRC bash
+   ffmpeg -fflags +genpts \
+          -i 'resources/data/sample/original.webm' \
+          -r 30 'resources/data/sample/original.mp4'
+ #+END_SRC
+6. Split the video to sequence of images:
    #+BEGIN_SRC bash
      rm -Rf 'resources/data/sample/images/*.jpg' && \
-     ffmpeg -i 'resources/data/sample/original.webm' \
+     ffmpeg -i 'resources/data/sample/original.mp4' \
             -s 960x540 -r 30 \
             'resources/data/sample/images/%04d.jpg'
    #+END_SRC
 ** Run
-6. Run ~python -m deep_sort.tracking~
-7. Join tracking images back to video
+1. Run ~python -m deep_sort.tracking.core~
+2. Join tracking images back to video
    #+BEGIN_SRC bash
      ffmpeg -framerate 30 -pattern_type glob \
             -i 'resources/data/sample/output_images/*.jpg' \
             -c:v libx264 -pix_fmt yuv420p \
             'resources/data/sample/tracked.mp4'
    #+END_SRC
+** One runnable command
+#+BEGIN_SRC bash
+  python -m deep_sort.setup && \
+  rm -Rf 'resources/data/sample/images/*.jpg' && \
+  ffmpeg -i 'resources/data/sample/original.mp4' \
+         -s 960x540 -r 30 \
+         'resources/data/sample/images/%04d.jpg' && \
+  python -m deep_sort.tracking.core && \
+  ffmpeg -framerate 30 -pattern_type glob \
+         -i 'resources/data/sample/output_images/*.jpg' \
+         -c:v libx264 -pix_fmt yuv420p \
+         'resources/data/sample/tracked.mp4'
+#+END_SRC
+
 ** Dataset
 Original dataset was downloaded from site which hosts various challenges for measuring the efficiency and correctness of the tracking methods. The dataset source might be found [[https://motchallenge.net/vis/MOT17-07-SDP][here]].
 

@@ -1,6 +1,7 @@
 __pycache__
 data/images
 data/videos
+resources/data/sample/original.mp4
 resources/data/sample/images/*.jpg
 resources/data/sample/output_images/*.jpg
 cfg/weights/checkpoint

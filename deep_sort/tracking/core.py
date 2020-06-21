@@ -10,6 +10,7 @@ import time
 import os
 
 def track_people():
+    state = None
     input_imgs_paths = list(filter(lambda p : operator.contains(p, '.jpg'), os.listdir(cf.VIDEO_IMAGES_PATH)))
     model = yolo.full_model()
 
@@ -18,9 +19,13 @@ def track_people():
         img = cv2.imread(os.path.join(cf.VIDEO_IMAGES_PATH, img_path))
         prediction = yolo.predict(model, img)
         boxes, scores, classes, nums = yolo.output_boxes(prediction)
-        img_with_boxes = draw.boxes(img, boxes, scores, classes, nums, cf.CLASS_NAMES)
 
-        cv2.imwrite(os.path.join(cf.VIDEO_IMAGES_OUTPUT_PATH, img_path), img_with_boxes)
+        img = np.squeeze(img)
 
+        new_img, new_state = draw.track(state, boxes, draw.boxes(img, boxes, scores, classes, nums, cf.CLASS_NAMES))
+        state = new_state
 
-track_people()
+        cv2.imwrite(os.path.join(cf.VIDEO_IMAGES_OUTPUT_PATH, img_path), new_img)
+
+if __name__ == '__main__':
+    track_people()
