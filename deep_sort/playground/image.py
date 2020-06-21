@@ -11,8 +11,6 @@ def main(args):
     image = cv2.imread(args[0])
     prediction = yolo.predict(model, image)
     boxes, scores, classes, nums = yolo.output_boxes(prediction)
-
-    image = np.squeeze(image)
     img = draw.boxes(image, boxes, scores, classes, nums, cf.CLASS_NAMES)
 
     cv2.imshow('Image detection', img)

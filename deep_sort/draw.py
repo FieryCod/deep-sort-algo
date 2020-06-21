@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 import time
 
+
 def boxes(
         img,
         boxes,
@@ -11,6 +12,7 @@ def boxes(
         detections,
         class_names,
 ):
+    img = np.squeeze(img)
     boxes = np.array(boxes)
 
     for i in range(detections):

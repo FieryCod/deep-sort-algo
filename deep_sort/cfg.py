@@ -56,7 +56,8 @@ MAX_OUTPUT_SIZE_PER_CLASS = 20
 IOU_THRESHOLD = 0.5
 CONFIDENCE_THRESHOLD = 0.5
 BLOCKS = parse_cfg(YOLO_CFG_FILE)
-VIDEO_IMAGES_PATH = "resources/data/sample/images"
+VIDEO_IMAGES_PATH = "resources/data/sample/images/"
+VIDEO_IMAGES_OUTPUT_PATH = "resources/data/sample/output_images/"
 
 # Further configure & read data
 reconfigure_tensorflow(GPU_DEVICES)
