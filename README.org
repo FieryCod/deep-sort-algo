@@ -6,7 +6,9 @@
 4. Put sample video in ~resources/data/sample/original.webm~
 5. Split the video to sequence of images:
    #+BEGIN_SRC bash
-     rm -Rf "resources/data/sample/images/*.jpg" && ffmpeg -i resources/data/sample/original.webm -s 960x540 -r 30  resources/data/sample/images/%04d.jpg
+     rm -Rf "resources/data/sample/images/*.jpg" && \
+     ffmpeg -i resources/data/sample/original.webm -s 960x540 \
+     -r 30  resources/data/sample/images/%04d.jpg
    #+END_SRC
 ** Dataset
 Original dataset was downloaded from site which hosts various challenges for measuring the efficiency and correctness of the tracking methods. The dataset source might be found [[https://motchallenge.net/vis/MOT17-07-SDP][here]].
