@@ -1,4 +1,6 @@
-* Yolov3-train
+* Deep sort alike
+Naive & not full featured implementation ~deep_sort~. Tracking is based on the plain ~IOU~ score.
+
 ** Setup
 1. Make sure that you have the latest ~conda~ installed.
 2. Run ~conda env create -f environment.yml~
@@ -10,7 +12,13 @@
           -i 'resources/data/sample/original.webm' \
           -r 30 'resources/data/sample/original.mp4'
  #+END_SRC
-6. Split the video to sequence of images:
+6. Clip the ~.mp4~ file (Optional)
+  #+BEGIN_SRC bash
+    ffmpeg -i 'resources/data/sample/original.mp4' \
+           -ss 00:00:0.0 -t 7 \
+           -an 'resources/data/sample/original_trim.mp4'
+  #+END_SRC
+7. Split the video to sequence of images:
    #+BEGIN_SRC bash
      rm -Rf 'resources/data/sample/images/*.jpg' && \
      ffmpeg -i 'resources/data/sample/original.mp4' \
