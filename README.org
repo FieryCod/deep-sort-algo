@@ -1,5 +1,5 @@
 * Deep sort alike
-Naive & not full featured implementation ~deep_sort~. Tracking is based on the plain ~IOU~ score.
+Naive & not full featured implementation of ~deep_sort~. Tracking is based on the plain ~IOU~ score.
 
 ** Setup
 1. Make sure that you have the latest ~conda~ installed.
