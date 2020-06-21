@@ -1,6 +1,7 @@
 __pycache__
 data/images
 data/videos
+resources/data/sample/images/*.jpg
 cfg/weights/checkpoint
 resources/model/*
 *.tf.*

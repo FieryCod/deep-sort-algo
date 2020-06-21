@@ -1,20 +1,45 @@
 * Yolov3-train
-
 ** Setup
 1. Make sure that you have the latest ~conda~ installed.
 2. Run ~conda env create -f environment.yml~
 3. Run ~python -m deep_sort.setup~
+4. Put sample video in ~resources/data/sample/original.webm~
+5. Split the video to sequence of images:
+#+BEGIN_SRC bash
+  ffmpeg -i resources/data/sample/original.webm -s 960x540 -r 25  resources/data/sample/output/%04d.jpg
+#+END_SRC
+** Dataset
+Original dataset was downloaded from site which hosts various challenges for measuring the efficiency and correctness of the tracking methods. The dataset source might be found [[https://motchallenge.net/vis/MOT17-07-SDP][here]].
+
+Downloaded dataset is ~.webm~ video of walking pedestrians who are followed by camera.
+
+*** Metadata of video
+To gather metadata of the video simply use the command:
+
+#+BEGIN_SRC bash
+  ffprobe resources/data/sample/original.webm
+#+END_SRC
+
+*Output*
+#+BEGIN_SRC text
+  COMPATIBLE_BRANDS: isomiso2mp41
+  MAJOR_BRAND     : isom
+  MINOR_VERSION   : 512
+  ENCODER         : Lavf57.83.100
+  Duration: 00:00:16.67,
+            start: 0.000000, bitrate: 4051 kb/s Stream #0:0: Video: vp9 (Profile 0), yuv420p(tv, progressive),
+            960x540, SAR 1:1 DAR 16:9,
+            30 fps, 30 tbr, 1k tbn, 1k tbc (default)
+  HANDLER_NAME    : VideoHandler
+  ENCODER         : Lavc57.107.100 libvpx-vp9
+  DURATION        : 00:00:16.666000000
+#+END_SRC
+** Configuration sources
+ - [[https://pjreddie.com/media/files/yolov3.weights][Pretrained yolov3 weights]]
+ - [[https://github.com/pjreddie/darknet/blob/master/data/coco.names][Detected objects]]
+ - [[ https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg][Yolo configuration]]
 ** Playground
 *** Simple image detection
 #+BEGIN_SRC bash
 python -m deep_sort.playground.image "resources/data/playground/1.jpg"
 #+END_SRC
-** Configuration sources
- - [[https://pjreddie.com/media/files/yolov3.weights][Pretrained yolov3 weights]]
- - [[https://github.com/pjreddie/darknet/blob/master/data/coco.names][Detected objects]]
- - [[ https://github.com/pjreddie/darknet/blob/master/cfg/yolov3.cfg][Yolo configuration]]
-
-** Dataset
-Original dataset was downloaded from site which hosts various challenges for measuring the efficiency and correctness of the tracking methods. The dataset source might be found [[https://motchallenge.net/vis/MOT17-07-SDP][here]].
-
-Downloaded dataset is ~.webm~ video of walking pedestrians who are followed by camera.
